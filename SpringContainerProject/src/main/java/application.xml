@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 클래스 등록
+		1. 객체 생성 (빈)
+		2. 멤버 변수의 초기화 담당
+		3. 필요한 메소드 호출
+		======================
+		4. 객체 사용 => 프로그래머가 활용
+		======================
+		5. 객체 메모리 해제
+		6. 객체 소멸
+		================= 스프링에서 객체 생명 주기
+		= 객체 생성 
+		  1) 싱글톤 => default 
+		  2) 프로토타입 => 복제 (clone())
+	 -->
+	<bean id="board" class="com.sist.spring3.Board" scope="prototype"/>
+	<bean id="notice" class="com.sist.spring3.Notice"/>
+	<bean id="member" class="com.sist.spring3.Member"/>
+</beans>

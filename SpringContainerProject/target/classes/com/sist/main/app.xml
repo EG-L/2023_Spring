@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="board" class="com.sist.main.Board"/>
+	<bean id="member" class="com.sist.main.Member"/>
+	<bean id="notice" class="com.sist.main.Notice"/>
+</beans>
