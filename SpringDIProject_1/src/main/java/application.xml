@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 클래스 등록
+		1. 객체 생성 (빈)
+		2. 멤버 변수의 초기화 담당
+		3. 필요한 메소드 호출
+		======================
+		4. 객체 사용 => 프로그래머가 활용
+		======================
+		5. 객체 메모리 해제
+		6. 객체 소멸
+		================= 스프링에서 객체 생명 주기
+		= 객체 생성 
+		  1) 싱글톤 => default 
+		  2) 프로토타입 => 복제 (clone())
+	 -->
+	<bean id="sa1" class="com.sist.sawon.Sawon">
+	<!-- Sawon sal = new Sawon() -->
+		<property name="sabun">
+			<value>1</value>
+		</property>
+		<!-- sal.setSabun(1) -->
+		<property name="name" value="홍길동"/>
+		<property name="dept" value="개발부"/>
+		<property name="job" value="대리"/>
+		<property name="loc" value="서울"/>
+		<!-- 
+			Sawon sa = new Sawon();
+			sa.setSabun(1)
+			sa.setName("홍길동")
+			sa.setDept("개발부")
+			sa.setJob("대리")
+			sa.setLoc("서울")
+		 -->
+	</bean>
+	<bean id="sa2" class="com.sist.sawon.Sawon" p:sabun="2" p:name="심청이" p:dept="총무부" p:job="사원" p:loc="경기"/>
+</beans>
