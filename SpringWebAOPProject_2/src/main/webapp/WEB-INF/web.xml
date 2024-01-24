@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<!-- 
+		DispatcherServlet ===== WebApplicationContext
+		                HandlerMapping : Model찾기(Controller)
+		                      | Model
+		                  ViewResolver : JSP찾기
+		                      | request
+		                    View (JSP)   HandlerMapping
+		1. 사용자 요청 (.do) => Controller   =======> 요청 처리(Model)
+		                     DispatcherServlet     Controller
+		                     FrontController           | ViewResolver
+		                     요청 받기                   JSP
+		                       |
+		                   WebApplicationContext
+		                
+		public class DispatcherServlet extends HttpServlet{
+			WebApplicationContext wc;
+			public void init(ServletConfig config){
+				String path = config.getInitParamer("contextConfigLocation");
+				if(path==null){
+					path="/Web-INF/<servlet-name>-servlet.xml";
+					                dispatcher-servlet.xml
+				}
+			}
+		}
+	 -->
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<servlet>
+	     <servlet-name>dispatcher</servlet-name>
+	     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	     <init-param>
+	         <param-name>contextConfigLocation</param-name>
+	         <param-value>/WEB-INF/config/application-*.xml</param-value>
+	     </init-param>
+	  	<!--  <init-param>
+	  		<param-name>contextClass</param-name>
+	  		<param-value>org.springframework.web.context.support.AnnotationConfigApplicationContext</param-value>
+	  	</init-param>
+	  	<init-param>
+	  		<param-name>contextConfigLocation</param-name>
+	  		<param-value>com.sist.config.DataBoardConfig</param-value>
+	  	</init-param>-->
+	 </servlet>
+	 <servlet-mapping>
+	     <servlet-name>dispatcher</servlet-name>
+	     <url-pattern>*.do</url-pattern>
+	 </servlet-mapping>
+	 
+	 <!-- Encoding Filter 생성 -->
+	 <!-- 한글 변환 -->
+	 <filter>
+	     <filter-name>encodingFilter</filter-name>
+	     <filter-class>
+	         org.springframework.web.filter.CharacterEncodingFilter
+	     </filter-class>
+	     <init-param>
+	         <param-name>encoding</param-name>
+	         <param-value>UTF-8</param-value>
+	     </init-param>
+	     <init-param>
+	         <param-name>forceEncoding</param-name>
+	         <param-value>true</param-value>
+	     </init-param>
+	 </filter>
+	 <filter-mapping>
+	     <filter-name>encodingFilter</filter-name>
+	     <url-pattern>/*</url-pattern>
+	 </filter-mapping>
+</web-app>
