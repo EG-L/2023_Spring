@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+	<!-- 톰캣이 읽는 파일 
+		1. 소스 분석 => web.xml
+		             프레임워크 사용
+		             스프링 => DispatcherServlet
+		             스트럿츠
+		               1 => ActionServlet
+		               2 => FilterDispatcher
+		          => server.xml
+		2. xml/자바 환경설정 
+		3. Model = DAO = JSP
+		** 서블릿은 URL주소에 의해 톰캣에 의해 실행한다.
+		
+		@WebServlet("*.do")
+		<init-param>
+	         <param-name>contextConfigLocation</param-name>
+	         <param-value>/WEB-INF/config/application-*.xml</param-value>
+	     </init-param>
+		public class DispatcherServlet extends HttpServlet{
+			public void init(ServletConfig config){ => web.xml
+				String path=config.getInitParameter("configContextLocation");
+				path="/WEB-INF/config/application-*.xml";
+				WebApplicationContext app = new WebApplicationContext(path)
+			}
+			while
+			public void service(request,response){
+				요청 => 응답
+			}
+			public void destroy(){
+				자동 메모리 해제
+			}
+		}
+	-->
+	<!-- DispatcherServlet -->
+	<!-- 한글 변환 -->
+	<servlet>
+	     <servlet-name>dispatcher</servlet-name>
+	     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	     <init-param>
+	         <param-name>contextConfigLocation</param-name>
+	         <param-value>/WEB-INF/config/application-*.xml</param-value>
+	     </init-param>
+	     
+	 </servlet>
+	 <servlet-mapping>
+	     <servlet-name>dispatcher</servlet-name>
+	     <url-pattern>*.do</url-pattern>
+	 </servlet-mapping>
+	 
+	 <!-- Encoding Filter 생성 -->
+	 <!-- 한글 변환 -->
+	 <filter>
+	     <filter-name>encodingFilter</filter-name>
+	     <filter-class>
+	         org.springframework.web.filter.CharacterEncodingFilter
+	     </filter-class>
+	     <init-param>
+	         <param-name>encoding</param-name>
+	         <param-value>UTF-8</param-value>
+	     </init-param>
+	     <init-param>
+	         <param-name>forceEncoding</param-name>
+	         <param-value>true</param-value>
+	     </init-param>
+	 </filter>
+	 <filter-mapping>
+	     <filter-name>encodingFilter</filter-name>
+	     <url-pattern>/*</url-pattern>
+	 </filter-mapping>
+</web-app>
