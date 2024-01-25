@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.GoodsMapper;
 import com.sist.vo.GoodsVO;
+import java.util.*;
 
 @Repository
 public class GoodsDAO {
@@ -23,5 +24,12 @@ public class GoodsDAO {
 	public GoodsVO goodsDetailData(int no) {
 		
 		return mapper.goodsDetailData(no);
+	}
+	public int goodsFindTotalData(String ss){
+		return mapper.goodsFindTotalData(ss);
+	}
+	
+	public List<GoodsVO> goodsFindData(Map map) {
+		return mapper.goodsFindData(map);
 	}
 }

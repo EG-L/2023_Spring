@@ -53,7 +53,7 @@
 				</tr>
 				<tr>
 					<td colspan="3" class="text-right">
-						<a href="../main/main.do" class="btn btn-xs btn-primary">목록</a>
+						<a href="javascript:history.back()" class="btn btn-xs btn-primary">목록</a>
 					</td>
 				</tr>
 			</table>

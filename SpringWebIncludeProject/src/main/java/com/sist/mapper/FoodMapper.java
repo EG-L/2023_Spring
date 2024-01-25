@@ -45,13 +45,13 @@ public interface FoodMapper {
 			+ "FROM (SELECT fno,name,poster,rownum as num "
 			+ "FROM (SELECT fno,name,poster "
 			+ "FROM food_menu_house "
-			+ "WHERE REGEXP_LIKE(${col-name},#{ss}) "
+			+ "WHERE REGEXP_LIKE(${col_name},#{ss}) "
 			+ "ORDER BY fno)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<FoodVO> foodFindData(Map map);
 	
 	@Select("SELECT CEIL(COUNT(*)/12) "
 			+ "FROM food_menu_house "
-			+ "WHERE REGEXP_LIKE(${col-name},${ss})")
+			+ "WHERE REGEXP_LIKE(${col_name},#{ss})")
 	public int foodFindTotalPage(Map map);
 }
