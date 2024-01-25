@@ -21,7 +21,7 @@ public class GoodsController {
 	private GoodsDAO dao;
 	
 	@GetMapping("goods/goods_home.do")
-	public String main_main(String page,Model model) {
+	public String goods_main(String page,Model model) {
 		if(page==null) page="1";
 		int curpage = Integer.parseInt(page);
 		int rowSize = 12;
@@ -48,7 +48,7 @@ public class GoodsController {
 	}
 	
 	@GetMapping("goods/detail_before.do")
-	public String GoodsDetailBefore(int no,HttpServletResponse response,RedirectAttributes ra) {
+	public String goodsDetailBefore(int no,HttpServletResponse response,RedirectAttributes ra) {
 		Cookie cookies = new Cookie("goods_"+no, String.valueOf(no));
 		cookies.setPath("/");
 		cookies.setMaxAge(60*60*24);
@@ -62,7 +62,7 @@ public class GoodsController {
 	}
 	
 	@GetMapping("goods/goods_detail.do")
-	public String goodsDeatail(int no,Model model) {
+	public String goodsDetail(int no,Model model) {
 		
 		GoodsVO vo = dao.goodsDetailData(no);
 		
@@ -72,7 +72,7 @@ public class GoodsController {
 	}
 	
 	@RequestMapping("goods/goods_find.do")
-	public String goodFind(String ss,String page,Model model){
+	public String goods_Find(String ss,String page,Model model){
 		if(page==null) {
 			page="1";
 		}

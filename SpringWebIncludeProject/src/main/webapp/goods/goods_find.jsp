@@ -18,10 +18,10 @@
 		<div style="height:20px"></div>
 		<div class="row">
 			<c:forEach var="vo" items="${list }">
-				<div class="col-sm-3">
-					<a href="../goods/goods_detail.do?no=${vo.no }">
+				<div class="col-sm-3" title="${vo.name }">
+					<a href="../goods/detail_before.do?no=${vo.no }">
 						<div class="panel panel-danger">
-							<div class="panel-heading">${vo.name }</div>
+							<div class="panel-heading">${vo.price }</div>
 							<div class="panel-body text-center">
 								<img src="${vo.poster }" style="width:180px;height:200px">
 							</div>
@@ -46,5 +46,16 @@
 			</ul>
 		</div>
 	</div>
+	<div class="row">
+			<h3>최근 방문</h3>
+			<hr>
+			<c:if test="${count!=0 }">
+				<c:forEach var="gvo" items="${gList }" varStatus="s">
+					<c:if test="${s.index<9 }">
+						<a href="../goods/detail_before.do?no=${gvo.no }"><img src="${gvo.poster }" style="width:100px;height:100px;"></a>
+					</c:if>
+				</c:forEach>
+			</c:if>
+		</div>
 </body>
 </html>

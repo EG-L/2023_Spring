@@ -22,7 +22,7 @@ public class GoodsAspect {
 	@Autowired
 	private GoodsDAO dao;
 	//finally 수행 => 무조건 전송
-	@After("execution(* com.sist.web.GoodsController.main_main(..))")
+	@After("execution(* com.sist.web.GoodsController.goods_*(..))")
 	public void cookieSend() {
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 		//                           ===============================================
