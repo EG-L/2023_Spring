@@ -17,4 +17,21 @@ public class FoodDAO {
 	public int foodTotalPage() {
 		return mapper.foodTotalPage();
 	}
+	
+	public FoodVO foodDetailData(int fno) {
+		mapper.hitIncrement(fno);
+		return mapper.foodDetailData(fno);
+	}
+	
+	public FoodVO foodCookieData(int fno) {
+		return mapper.foodDetailData(fno);
+	}
+	// 검색
+	public List<FoodVO> foodFindData(Map map){
+		return mapper.foodFindData(map);
+	}
+	
+	public int foodFindTotalPage(Map map) {
+		return mapper.foodFindTotalPage(map);
+	}
 }

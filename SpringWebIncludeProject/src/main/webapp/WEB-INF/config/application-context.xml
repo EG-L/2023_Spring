@@ -17,4 +17,13 @@
 		p:prefix="/"
 		p:suffix=".jsp"
 	/>
+	
+	<mvc:annotation-driven/>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/*"/><!-- 모든 url 적용 -->
+			<!-- URL 제외 시에 사용 --><!-- <mvc:exclude-mapping path=""/> -->
+			<bean id="foodInter" class="com.sist.inter.FoodInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
