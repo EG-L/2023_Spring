@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.GoodsMapper;
 import com.sist.vo.GoodsVO;
+import com.sist.vo.ReplyGoodsVO;
+
 import java.util.*;
 
 @Repository
@@ -31,5 +33,18 @@ public class GoodsDAO {
 	
 	public List<GoodsVO> goodsFindData(Map map) {
 		return mapper.goodsFindData(map);
+	}
+	
+	public void goodsInsertReply(ReplyGoodsVO vo) {
+		mapper.goodsInsertReply(vo);
+	}
+	public int goodsTotalCountReply(int fno) {
+		return mapper.goodsTotalCountReply(fno);
+	}
+	public List<ReplyGoodsVO> goodsSelectReply(int fno){
+		return mapper.goodsSelectReply(fno);
+	}
+	public void goodsDeleteReply(int no) {
+		mapper.goodsDeleteReply(no);
 	}
 }

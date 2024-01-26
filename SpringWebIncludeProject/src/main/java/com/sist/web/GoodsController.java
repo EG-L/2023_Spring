@@ -4,16 +4,19 @@ import java.util.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sist.dao.GoodsDAO;
 import com.sist.vo.GoodsVO;
+import com.sist.vo.ReplyGoodsVO;
 
 @Controller
 public class GoodsController {
@@ -66,7 +69,10 @@ public class GoodsController {
 		
 		GoodsVO vo = dao.goodsDetailData(no);
 		
+		List<ReplyGoodsVO> glist = dao.goodsSelectReply(no);
+		
 		model.addAttribute("vo",vo);
+		model.addAttribute("gList",glist);
 		model.addAttribute("main_jsp","../goods/goods_detail.jsp");
 		return "main/main";
 	}
@@ -112,4 +118,27 @@ public class GoodsController {
 		return "main/main";
 	}
 	
+	@PostMapping("goods/reply_insert.do")
+	public String goods_reply_insert(int fno,String msg,HttpSession session,RedirectAttributes ra) {
+		//#{fno},#{id},#{name},#{msg}
+		ReplyGoodsVO vo = new ReplyGoodsVO();
+		String id = (String)session.getAttribute("id");
+		String name = (String)session.getAttribute("name");
+		vo.setFno(fno);
+		vo.setMsg(msg);
+		vo.setId(id);
+		vo.setName(name);
+		dao.goodsInsertReply(vo);
+		
+		ra.addAttribute("no",fno);
+		return "redirect:../goods/detail_before.do";
+	}
+	
+	@GetMapping("goods/reply_delete.do")
+	public String goods_reply_delete(int fno,int no,RedirectAttributes ra) {
+		dao.goodsDeleteReply(no);
+		
+		ra.addAttribute("no",fno);
+		return "redirect:../goods/detail_before.do";
+	}
 }
