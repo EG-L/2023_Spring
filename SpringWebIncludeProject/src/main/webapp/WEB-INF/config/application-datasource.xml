@@ -25,9 +25,15 @@
 		p:password="#{db['password']}"
 	/>
 	<!-- Transaction 등록 -->
+	<tx:annotation-driven/>
+	<bean id="transcationManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		p:dataSource-ref="ds"
+	/>
 	<!-- SqlSessionFactory -->
 	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:dataSource-ref="ds"
+		p:configLocation="/WEB-INF/config/Config.xml"
 	/>
 	<!-- Mapper 구현 요청 -->
 	<mybatis-spring:scan base-package="com.sist.mapper"
