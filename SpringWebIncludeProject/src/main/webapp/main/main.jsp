@@ -30,6 +30,17 @@
 			</div>
 		</div>
 	</c:if>
+	<c:if test="${sessionScope.id==null }">
+		<div class="container">
+			<div class="row">
+				<div class="text-right">
+					<a href="../member/login.do">
+						<button class="btn-sm btn-danger">로그인</button>
+					</a>
+				</div>
+			</div>
+		</div>
+	</c:if>
 	<div style="height:20px"></div>
 	<jsp:include page="${main_jsp }"/>
 </body>
